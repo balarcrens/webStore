@@ -1,3 +1,4 @@
+require('dotenv').config();
 const connectMongo = require('./db.js');
 const express = require('express');
 const cors = require('cors');
@@ -12,5 +13,9 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 
 app.use('/api/product', require('./routes/product'));
+
+app.get('/', (req, res) => {
+    res.send('API is running 🚀');
+});
 
 app.listen(port)

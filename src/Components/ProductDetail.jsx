@@ -121,7 +121,7 @@ export default function ProductDetail() {
         <div className="container py-5 my-5" style={{ backgroundColor: "#EEF2F7" }}>
             <div className="row my-5">
                 <div className="col-md-6">
-                    <img src={`http://localhost:3000/${product.image}`} alt={product.name} className="img-fluid rounded shadow" />
+                    <img src={`https://webstore-backend-1boc.onrender.com/${product.image}`} alt={product.name} className="img-fluid rounded shadow" />
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center">
                     <h1 className="mb-3">{product.name}</h1>

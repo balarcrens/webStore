@@ -1,17 +1,16 @@
 [
   {
-    "order_id": "order_QMUMJVrcHwoGYG",
-    "amount": 1000000,
+    "order_id": "order_rcptid_11",
+    "amount": 50000,
     "currency": "INR",
-    "receipt": "receipt_6808936d0579e9dbad3bffc6",
+    "receipt": "order_rcptid_11",
     "status": "created"
   },
   {
-    "order_id": "order_QONP9gehCG8GSR",
-    "amount": 1000000,
+    "order_id": "order_rcptid_12",
+    "amount": 15000,
     "currency": "INR",
-    "receipt": "receipt_6808936d0579e9dbad3bffc6",
-    "status": "paid",
-    "payment_id": "pay_QONPHN5k1vz4Hr"
+    "receipt": "order_rcptid_12",
+    "status": "paid"
   }
 ]

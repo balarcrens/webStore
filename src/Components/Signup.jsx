@@ -8,7 +8,7 @@ export default function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch(`http://192.168.0.22:7000/api/auth/createuser`, {
+        const response = await fetch(`http://${process.env.REACT_APP_HOST}:7000/api/auth/createuser`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

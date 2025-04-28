@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
-const URI = "mongodb://localhost:27017/?directConnection=true"
 
 const connectMongo = () => {
-    mongoose.connect(URI);
-    // console.log("connected to mongoDB");
+    mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 15000,
+    }).then(() => console.log('MongoDB Connected'))
+        .catch(err => console.error('MongoDB Error:', err));
 }
 
 module.exports = connectMongo;

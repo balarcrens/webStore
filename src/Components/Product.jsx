@@ -11,7 +11,7 @@ export default function Product() {
                 window.location.href = '/login'
             }
             try {
-                const res = await fetch("http://localhost:7000/api/product/fetchallproducts", {
+                const res = await fetch("https://webstore-backend-1boc.onrender.com/api/product/fetchallproducts", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

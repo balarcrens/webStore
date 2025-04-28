@@ -13,7 +13,7 @@ export default function ProductDetail() {
             if (!localStorage.getItem("auth-token")) {
                 window.location.href = '/login'
             }
-            const res = await fetch(`http://localhost:7000/api/product/${id}`, {
+            const res = await fetch(`https://webstore-backend-1boc.onrender.com/api/product/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

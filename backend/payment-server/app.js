@@ -108,4 +108,14 @@ app.post('/verify-payment', (req, res) => {
     }
 });
 
+app.get('/get-orders', (req, res) => {
+    try {
+        const orders = readData(); // Read orders from the file
+        res.status(200).json(orders); // Send orders as a JSON response
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching orders');
+    }
+});
+
 app.listen(port);

@@ -36,7 +36,7 @@ export default function ProductDetail() {
 
     const handlePayment = async () => {
         try {
-            const res = await fetch("http://localhost:7777/create-order", {
+            const res = await fetch("https://webstore-payment.onrender.com/create-order", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -63,7 +63,7 @@ export default function ProductDetail() {
                 order_id: order.id,
                 handler: async function (response) {
                     // Verify payment
-                    const verifyRes = await fetch("http://localhost:7777/verify-payment", {
+                    const verifyRes = await fetch("https://webstore-payment.onrender.com/verify-payment", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

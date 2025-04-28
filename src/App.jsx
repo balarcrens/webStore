@@ -12,7 +12,7 @@ import Signup from './Components/Signup';
 import Login from './Components/Login';
 function App() {
 	return (
-		<div className='container border'>
+		<div className='container border p-0'>
 			<Navbar />
 			<Routes>
 				<Route exact path='/' element={<Home />}></Route>

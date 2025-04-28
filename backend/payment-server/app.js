@@ -108,6 +108,6 @@ app.post('/verify-payment', (req, res) => {
     }
 });
 
-app.listen(port, process.env.REACT_APP_HOST, () => {
+app.listen(port, process.env.REACT_APP_HOST || '0.0.0.0', () => {
     // console.log(`payment-server running: http://192.168.0.22:${port}`);
 });

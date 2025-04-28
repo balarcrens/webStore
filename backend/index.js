@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const app = express();
 
-const host = process.env.REACT_APP_HOST;
+const host = process.env.REACT_APP_HOST || '0.0.0.0';
 
 connectMongo();
 

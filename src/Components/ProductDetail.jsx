@@ -13,7 +13,7 @@ export default function ProductDetail() {
             if (!localStorage.getItem("auth-token")) {
                 window.location.href = '/login'
             }
-            const res = await fetch(`http://192.168.0.22:7000/api/product/${id}`, {
+            const res = await fetch(`http://localhost:7000/api/product/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export default function ProductDetail() {
 
     const handlePayment = async () => {
         try {
-            const res = await fetch("http://192.168.0.22:7777/create-order", {
+            const res = await fetch("http://localhost:7777/create-order", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -63,7 +63,7 @@ export default function ProductDetail() {
                 order_id: order.id,
                 handler: async function (response) {
                     // Verify payment
-                    const verifyRes = await fetch(`https://${process.env.REACT_APP_HOST || '0.0.0.0'}:7777/verify-payment`, {
+                    const verifyRes = await fetch("http://localhost:7777/verify-payment", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -118,7 +118,7 @@ export default function ProductDetail() {
         <div className="container py-5 my-5" style={{ backgroundColor: "#EEF2F7" }}>
             <div className="row my-5">
                 <div className="col-md-6">
-                    <img src={`https://${process.env.REACT_APP_HOST || '0.0.0.0'}:3000/${product.image}`} alt={product.name} className="img-fluid rounded shadow" />
+                    <img src={`http://localhost:3000/${product.image}`} alt={product.name} className="img-fluid rounded shadow" />
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center">
                     <h1 className="mb-3">{product.name}</h1>

@@ -63,7 +63,7 @@ export default function ProductDetail() {
                 order_id: order.id,
                 handler: async function (response) {
                     // Verify payment
-                    const verifyRes = await fetch("http://192.168.0.22:7777/verify-payment", {
+                    const verifyRes = await fetch(`https://${process.env.REACT_APP_HOST || '0.0.0.0'}:7777/verify-payment`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -118,7 +118,7 @@ export default function ProductDetail() {
         <div className="container py-5 my-5" style={{ backgroundColor: "#EEF2F7" }}>
             <div className="row my-5">
                 <div className="col-md-6">
-                    <img src={`http://${process.env.REACT_APP_HOST || '0.0.0.0'}:3000/${product.image}`} alt={product.name} className="img-fluid rounded shadow" />
+                    <img src={`https://${process.env.REACT_APP_HOST || '0.0.0.0'}:3000/${product.image}`} alt={product.name} className="img-fluid rounded shadow" />
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center">
                     <h1 className="mb-3">{product.name}</h1>

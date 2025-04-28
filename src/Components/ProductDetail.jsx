@@ -1,12 +1,12 @@
-// src/pages/ProductDetail.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Alert from './Alert';
+import toast from 'react-hot-toast';
 
 export default function ProductDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
-    const [orderPlaced, setOrderPlaced] = useState(false);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -77,10 +77,13 @@ export default function ProductDetail() {
 
                     const verifyData = await verifyRes.json();
                     if (verifyData.status === "ok") {
-                        // alert("✅ Order Placed Successfully!");
-                        setOrderPlaced(true);
+                        toast.success("Order Successfully Placed", {
+                            duration: 1500
+                        })
                     } else {
-                        alert("❌ Payment verification failed.");
+                        toast.error("Payment Verfication Failed", {
+                            duration: 1500
+                        })
                     }
                 },
                 prefill: {
@@ -104,13 +107,13 @@ export default function ProductDetail() {
     if (!product) return <p className="text-center py-5">Loading product...</p>;
 
     const inc = () => {
-        setQuantity(quantity+1);
+        setQuantity(quantity + 1);
     }
     const desc = () => {
-        if(quantity <= 1) {
+        if (quantity <= 1) {
             setQuantity(1);
         } else {
-            setQuantity(quantity-1);
+            setQuantity(quantity - 1);
         }
     }
 
@@ -130,24 +133,19 @@ export default function ProductDetail() {
                         <label className="form-label fw-bold">Quantity:</label>
                         <div className='d-flex'>
                             <button className='btn btn-primary m-0 px-3' onClick={desc}>-</button>
-                            <input type="number" className="form-control text-center" style={{ width: "15%"}} min="1" value={quantity} onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))} disabled/>
+                            <input type="number" className="form-control text-center" style={{ width: "15%" }} min="1" value={quantity} onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))} disabled />
                             <button className='btn btn-primary m-0' onClick={inc}>+</button>
                         </div>
                     </div>
                     <div className="">
-                        Payable Amount : { product.price * quantity } <br />
+                        Payable Amount : {product.price * quantity} <br />
                     </div>
-                    {!orderPlaced ? (
-                        <div className="d-flex gap-3">
-                            <button onClick={handlePayment} className="btn btn-primary mt-3">Buy Now</button>
-                        </div>
-                    ) : (
-                        <div className="alert alert-success mt-4">
-                            ✅ Order placed successfully!
-                        </div>
-                    )}
+                    <div className="d-flex gap-3">
+                        <button onClick={handlePayment} className="btn btn-primary mt-3">Buy Now</button>
+                    </div>
                 </div>
             </div>
+            <Alert />
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-// import Alert from './Alert';
-// import toast from 'react-hot-toast';
+import Alert from './Alert';
+import toast from 'react-hot-toast';
 
 export default function Signup() {
     const [cred, setcred] = useState({ name: "", email: "", password: "", cpassword: "" });
@@ -18,9 +18,14 @@ export default function Signup() {
         const data = await response.json();
         localStorage.setItem("auth-token", data.token)
         if (data) {
-            window.location.href = '/'
+            window.location.href = '/';
+            toast.success("SignUp Successfully", {
+                duration: 1500
+            });
         } else {
-            
+            toast.error("Invalid Credentials", {
+                duration: 1500,
+            });
         }
     }
 
@@ -50,7 +55,7 @@ export default function Signup() {
                 </div>
                 <button type="submit" className="btn btn-primary">Sign Up</button>
             </form>
-            {/* <Alert /> */}
+            <Alert />
         </div>
     )
 }

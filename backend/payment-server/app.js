@@ -97,10 +97,10 @@ app.post('/verify-payment', (req, res) => {
                 writeData(orders);
             }
             res.status(200).json({ status: 'ok' });
-            console.log("Payment verification successful");
+            // console.log("Payment verification successful");
         } else {
             res.status(400).json({ status: 'verification_failed' });
-            console.log("Payment verification failed");
+            // console.log("Payment verification failed");
         }
     } catch (error) {
         console.error(error);
@@ -108,6 +108,4 @@ app.post('/verify-payment', (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    // console.log(`payment-server running: http://192.168.0.22:${port}`);
-});
+app.listen(port);

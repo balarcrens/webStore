@@ -54,7 +54,7 @@ export default function Product() {
                 <div className="row g-5 text-center">
                     {
                         products.map(product => (
-                            <div className="col-md-4" key={product._id}>
+                            <div className="col-md-4 p-0" key={product._id}>
                                 <Link to={`/product/${product._id}`} className="btn w-100">
                                     <div className="card product-card">
                                         <img src={product.image} className="card-img-top" alt={product.name} height="303px" width="202px" />

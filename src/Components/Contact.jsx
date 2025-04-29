@@ -10,7 +10,6 @@ export default function Contact() {
                 </div>
 
                 <div className="row g-5">
-                    {/* Contact Info */}
                     <div className="col-md-5">
                         <div className="bg-light p-4 rounded shadow-sm h-100 d-flex" style={{ flexDirection: "column", justifyContent:"center" }}>
                             <h5 className="mb-4">Reach Us</h5>
@@ -21,14 +20,13 @@ export default function Contact() {
                         </div>
                     </div>
 
-                    {/* Contact Form */}
                     <div className="col-md-7">
                         <div className="p-4 rounded shadow-sm bg-white">
                             <h5 className="mb-4">Send a Message</h5>
                             <form>
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Your Name</label>
-                                    <input type="text" className="form-control" id="name" placeholder="John Doe" required />
+                                    <input type="text" className="form-control" id="name" placeholder="Enter Your Name" required />
                                 </div>
 
                                 <div className="mb-3">

@@ -144,18 +144,20 @@ export default function Orderpage() {
                                                 {order.status === "cancelled" && <span className="badge bg-danger text-light">Cancelled</span>}
                                             </td>
                                             <td>
-                                                {(order.status === "paid" || order.status === "created") && (
+                                                {(order.status === "paid") && (
                                                     <>
                                                         <button className="btn btn-outline-danger btn-sm me-2" onClick={() => handleCancel(order.order_id)}> Cancel </button>
                                                         <button className="btn btn-outline-warning btn-sm" onClick={() => handleRefund(order.order_id, order.payment_id)}> Refund </button>
                                                     </>
                                                 )}
+                                                {(order.status === "created") && (
+                                                    <>
+                                                        <button className="btn btn-outline-danger btn-sm me-2" onClick={() => handleCancel(order.order_id)}> Cancel </button>
+                                                    </>
+                                                )}
                                                 {(order.status === "refund_requested" || order.status === "refunded" || order.status === "cancelled") && (
                                                     <i className="text-muted">No actions available</i>
                                                 )}
-                                                {/* {
-                                                    order.status === "created" 
-                                                } */}
                                             </td>
                                         </tr>
                                     ))}

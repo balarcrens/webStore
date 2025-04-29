@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 export default function Orderpage() {
     const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     // Fetch orders when the component loads
     useEffect(() => {
@@ -18,7 +18,7 @@ export default function Orderpage() {
                 });
                 const data = await res.json();
                 setOrders(data);
-                setLoading(false);
+                setIsLoading(false);
             } catch (error) {
                 toast.error("Error fetching orders");
                 console.error("Error fetching orders:", error);
@@ -27,53 +27,63 @@ export default function Orderpage() {
         fetchOrders();
     }, []);
 
-    if (loading) return <p>Loading orders...</p>;
-
     return (
-        <div className="container py-5">
-            <h1 className="mb-4 text-center">Your Orders</h1>
-            {orders.length === 0 ? (
-                <p>No orders found.</p>
-            ) : (
-                <table className="table table-bordered table-striped table-hover text-center">
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {orders.map((order) => (
-                            <tr key={order.order_id}>
-                                <td>{order.order_id}</td>
-                                <td>₹{order.amount / 100}</td>
-                                <td>{order.status}</td>
-                                <td>
-                                    {order.status === "paid" && (
-                                        <>
-                                            <button className="btn btn-danger" onClick={() => handleCancel(order.order_id)}>
-                                                Cancel Order
-                                            </button>
-                                            <button className="btn btn-warning m-1" onClick={() => handleRefund(order.order_id, order.payment_id)}>
-                                                Request Refund
-                                            </button>
-                                        </>
-                                    )}
-                                    {order.status === "refund_requested" && (
-                                        <span className="text-warning">Refund Requested</span>
-                                    )}
-                                    {order.status === "refunded" && (
-                                        <span className="text-success">Refunded</span>
-                                    )}
-                                </td>
+        <>
+            {
+                isLoading && <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+                    <div className="text-center">
+                        <div className="spinner-border text-primary" role="status" style={{ width: "3rem", height: "3rem" }}>
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                        <p className="mt-3">Please wait, Fetching your Orders...</p>
+                    </div>
+                </div>
+            }
+            <div className="container py-5">
+                <h1 className="mb-4 text-center">Your Orders</h1>
+                {orders.length === 0 ? (
+                    <p className='text-center'>No orders found.</p>
+                ) : (
+                    <table className="table table-bordered table-striped table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            )}
-        </div>
+                        </thead>
+                        <tbody>
+                            {orders.map((order) => (
+                                <tr key={order.order_id}>
+                                    <td>{order.order_id}</td>
+                                    <td>₹{order.amount / 100}</td>
+                                    <td>{order.status}</td>
+                                    <td>
+                                        {order.status === "paid" && (
+                                            <>
+                                                <button className="btn btn-danger" onClick={() => handleCancel(order.order_id)}>
+                                                    Cancel Order
+                                                </button>
+                                                <button className="btn btn-warning m-1" onClick={() => handleRefund(order.order_id, order.payment_id)}>
+                                                    Request Refund
+                                                </button>
+                                            </>
+                                        )}
+                                        {order.status === "refund_requested" && (
+                                            <span className="text-warning">Refund Requested</span>
+                                        )}
+                                        {order.status === "refunded" && (
+                                            <span className="text-success">Refunded</span>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
+            </div>
+        </>
     );
 }
 

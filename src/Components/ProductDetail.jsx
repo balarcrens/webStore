@@ -120,8 +120,8 @@ export default function ProductDetail() {
     return (
         <div className="container py-5 my-5" style={{ backgroundColor: "#EEF2F7" }}>
             <div className="row my-5">
-                <div className="col-md-6">
-                    <img src={`https://webstore-vp2d.onrender.com/${product.image}`} alt={product.name} className="img-fluid rounded shadow m-auto" />
+                <div className="col-md-6 d-flex" style={{ justifyContent:"center" }}>
+                    <img src={`https://webstore-vp2d.onrender.com/${product.image}`} alt={product.name} className="img-fluid rounded shadow"/>
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center">
                     <h1 className="mb-3">{product.name}</h1>
@@ -131,9 +131,9 @@ export default function ProductDetail() {
 
                     <div className="mb-4">
                         <label className="form-label fw-bold">Quantity:</label>
-                        <div className='d-flex'>
+                        <div className='d-flex flex-wrap'>
                             <button className='btn btn-primary m-0 px-3' onClick={desc}>-</button>
-                            <input type="number" className="form-control text-center" style={{ width: "15%" }} min="1" value={quantity} onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))} disabled />
+                            <input type="number" className="form-control text-center" style={{ width: "15%", minWidth:"47px" }} min="1" value={quantity} onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))} disabled />
                             <button className='btn btn-primary m-0' onClick={inc}>+</button>
                         </div>
                     </div>

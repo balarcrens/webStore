@@ -7,6 +7,7 @@ export default function ProductDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
+    // const [showCancel, setShowCancel] = useState(false);
 
     useEffect(() => {
         const fetchProduct = async () => {

@@ -38,7 +38,8 @@ export default function Footer() {
 
                 <hr className="bg-secondary" />
                 <div className="text-center">
-                    <small>© {new Date().getFullYear()} WebStore. All rights reserved.</small>
+                    <small>© {new Date().getFullYear()} WebStore. All rights reserved. </small>
+                    <Link to='/terms' className='text-light'>Term And Condition</Link>
                 </div>
             </div>
         </footer>

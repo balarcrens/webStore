@@ -40,7 +40,7 @@ export default function Footer() {
                 <div className="text-center">
                     <small>© {new Date().getFullYear()} WebStore. All rights reserved. </small>
                     <Link to='/privacy' className='text-light'>Privacy Policy</Link> and
-                    <Link to='/terms' className='text-light'>Term And Condition</Link>
+                    <Link to='/terms' className='text-light'> Term And Condition</Link>
                 </div>
             </div>
         </footer>

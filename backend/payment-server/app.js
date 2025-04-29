@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const { validateWebhookSignature } = require('razorpay/dist/utils/razorpay-utils');
 const cors = require('cors');
+// const { default: orders } = require('razorpay/dist/types/orders');
 
 const app = express();
 const port = process.env.PORT || 7777;
@@ -117,5 +118,60 @@ app.get('/get-orders', (req, res) => {
         res.status(500).send('Error fetching orders');
     }
 });
+
+app.post('/cancel', (req, res) => {
+    try {
+        const { order_id } = req.body;
+        const orders = readData();
+        const index = orders.findIndex(o => o.order_id === order_id);
+
+        if (index === -1) {
+            return res.json({ success: false, message: "Order not found" });
+        }
+
+        const order = orders[index];
+
+        if (order.status !== 'created' && order.status !== 'paid') {
+            return res.json({ success: false, message: "Order cannot be cancelled" });
+        }
+
+        order.status = 'cancelled';
+        orders[index] = order;
+        writeData(orders);
+
+        res.json({ success: true, message: "Order cancelled successfully" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+});
+
+app.post('/refund', (req, res) => {
+    try {
+        const { order_id } = req.body;
+        const orders = readData();
+        const index = orders.findIndex(o => o.order_id === order_id);
+
+        if (index === -1) {
+            return res.json({ success: false, message: "Order not found" });
+        }
+
+        const order = orders[index];
+
+        if (order.status !== 'paid') {
+            return res.json({ success: false, message: "Refund not applicable" });
+        }
+
+        order.status = 'refund_requested';
+        orders[index] = order;
+        writeData(orders);
+
+        res.json({ success: true, message: "Refund request submitted" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+});
+
 
 app.listen(port);

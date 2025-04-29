@@ -7,7 +7,7 @@ export default function ProductDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
-    // const [showCancel, setShowCancel] = useState(false);
+    const [showCancel, setShowCancel] = useState(false);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -80,7 +80,8 @@ export default function ProductDetail() {
                     if (verifyData.status === "ok") {
                         toast.success("Order Successfully Placed", {
                             duration: 1500
-                        })
+                        });
+                        setShowCancel(true);
                     } else {
                         toast.error("Payment Verfication Failed", {
                             duration: 1500
@@ -118,6 +119,58 @@ export default function ProductDetail() {
         }
     }
 
+    const handleCancelOrder = async () => {
+        try {
+            const res = await fetch("https://webstore-backend-1boc.onrender.com/api/order/cancel", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem("auth-token"),
+                },
+                body: JSON.stringify({
+                    productId: product._id,
+                }),
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                toast.success("Order Cancelled Successfully", { duration: 1500 });
+                setShowCancel(false);
+            } else {
+                toast.error(data.message || "Cancel Failed", { duration: 1500 });
+            }
+        } catch (err) {
+            console.error("Cancel error:", err);
+            toast.error("Something went wrong!", { duration: 1500 });
+        }
+    };
+
+    const handleRefundRequest = async () => {
+        try {
+            const res = await fetch("https://webstore-backend-1boc.onrender.com/api/order/refund", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem("auth-token"),
+                },
+                body: JSON.stringify({
+                    productId: product._id,
+                }),
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                toast.success("Refund Requested", { duration: 1500 });
+                setShowCancel(false);
+            } else {
+                toast.error(data.message || "Refund Failed", { duration: 1500 });
+            }
+        } catch (err) {
+            console.error("Refund error:", err);
+            toast.error("Something went wrong!", { duration: 1500 });
+        }
+    };
+
     return (
         <div className="container py-5 my-5" style={{ backgroundColor: "#EEF2F7" }}>
             <div className="row my-5">
@@ -144,6 +197,16 @@ export default function ProductDetail() {
                     <div className="d-flex gap-3">
                         <button onClick={handlePayment} className="btn btn-primary mt-3">Buy Now</button>
                     </div>
+                    {showCancel && (
+                        <div className="mt-3">
+                            <button onClick={handleCancelOrder} className="btn btn-outline-danger me-3">
+                                Cancel Order
+                            </button>
+                            <button onClick={handleRefundRequest} className="btn btn-outline-warning">
+                                Request Refund
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
             <Alert />

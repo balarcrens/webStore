@@ -146,9 +146,9 @@ app.post('/cancel', (req, res) => {
     }
 });
 
-app.post('/refund', (req, res) => {
+app.post('/refund', async (req, res) => {
     try {
-        const { order_id } = req.body;
+        const { order_id, payment_id } = req.body;
         const orders = readData();
         const index = orders.findIndex(o => o.order_id === order_id);
 
@@ -162,11 +162,18 @@ app.post('/refund', (req, res) => {
             return res.json({ success: false, message: "Refund not applicable" });
         }
 
-        order.status = 'refund_requested';
+        // Call Razorpay refund API
+        const refund = await razorpay.payments.refund(payment_id, {
+            amount: order.amount // Refund full amount (optional)
+        });
+
+        // Update order status
+        order.status = 'refunded';
+        order.refund_id = refund.id;
         orders[index] = order;
         writeData(orders);
 
-        res.json({ success: true, message: "Refund request submitted" });
+        res.json({ success: true, message: "Refund processed successfully", refund });
     } catch (err) {
         console.error(err);
         res.status(500).json({ success: false, message: "Internal server error" });

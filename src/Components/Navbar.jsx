@@ -28,6 +28,7 @@ export default function Navbar() {
                             <Link className="nav-link" to="/contact">Contact</Link>
                         </li>
                     </ul>
+                    <Link to="order" style={{ marginRight:"20px", color:"black" }}><i class="fa-solid fa-box-open fa-xl"></i></Link>
                     {
                         !localStorage.getItem("auth-token") ? <form className="d-flex">
                             <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>

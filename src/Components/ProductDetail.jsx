@@ -121,7 +121,7 @@ export default function ProductDetail() {
 
     const handleCancelOrder = async () => {
         try {
-            const res = await fetch("https://webstore-backend-1boc.onrender.com/api/order/cancel", {
+            const res = await fetch("https://webstore-payment.onrender.com/cancel", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -147,7 +147,7 @@ export default function ProductDetail() {
 
     const handleRefundRequest = async () => {
         try {
-            const res = await fetch("https://webstore-backend-1boc.onrender.com/api/order/refund", {
+            const res = await fetch("https://webstore-payment.onrender.com/refund", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

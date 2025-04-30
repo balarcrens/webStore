@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Alert from './Alert';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
     const [cred, setcred] = useState({ email: "", password: "" });
@@ -47,6 +48,7 @@ export default function Login() {
                     <input type="password" name='password' className="form-control" id="password" autoComplete="current-password" onChange={onChange} value={cred.password} minLength={5} required />
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
+                <Link to="/signup" className='float-end'>Create Account</Link>
             </form>
             <Alert />
         </div>

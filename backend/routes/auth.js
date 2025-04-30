@@ -8,9 +8,6 @@ const { body, validationResult } = require('express-validator');
 
 const JWT_SECRET = 'web_store@446';
 
-// const ADMIN_EMAIL = 'admin@webstore.com'; // Fixed email for admin
-// const ADMIN_PASSWORD = 'adminpass123';  // Fixed password for admin
-
 // @route   POST /api/auth/createuser
 router.post('/createuser', [
     body('name').notEmpty(),
@@ -98,9 +95,6 @@ router.post('/login', [
 
 router.post('/getuser', fetchuser, async (req, res) => {
     try {
-        // console.log('User info from token:', req.user);
-        // console.log('User role:', req.user.role);
-
         const userId = req.user.id;
         const user = await User.findById(userId).select("-password");
         res.send({ user });

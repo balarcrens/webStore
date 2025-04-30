@@ -31,8 +31,7 @@ export default function Navbar() {
                     <Link to="order" style={{ marginRight:"20px", color:"black" }}><i className="fa-solid fa-box-open fa-xl"></i></Link>
                     {
                         !localStorage.getItem("auth-token") ? <form className="d-flex">
-                            <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
-                            <Link className="btn btn-primary mx-1" to="/signup" role="button">SignUp</Link>
+                            <Link className="btn btn-primary mx-1" to="/signup" role="button">SignUp / Login</Link>
                         </form> : <button onClick={logout} className="btn btn-primary mx-1">Logout</button>
                     }
                 </div>

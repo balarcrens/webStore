@@ -23,29 +23,7 @@ export default function ProductDetail() {
             const data = await res.json();
             setProduct(data.product);
         };
-        fetchProduct();
-
-        const fetchMovieapi = async () => {
-            try {
-                const res = await fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', {
-                    method: 'GET',
-                    headers: {
-                        accept: 'application/json',
-                        Authorization: 'Bearer <your_token_here>', // Replace with your TMDB token
-                    },
-                });
-        
-                if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
-                }
-        
-                const data = await res.json();
-                console.log(data);
-            } catch (error) {
-                console.error('Fetch failed:', error);
-            }
-        };
-        fetchMovieapi();    
+        fetchProduct();  
     }, [id]);
 
     useEffect(() => {

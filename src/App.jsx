@@ -14,6 +14,7 @@ import Contact from './Components/Contact';
 import TermCon from './Components/TermCon';
 import Policy from './Components/Policy';
 import Orderpage from './Components/Orderpage';
+import Cart from './Components/Cart';
 function App() {
 	return (
 		<div className='container border p-0'>
@@ -29,6 +30,7 @@ function App() {
 				<Route exact path='/privacy' element={<Policy />}></Route>
 				<Route exact path='/terms' element={<TermCon />}></Route>
 				<Route exact path='/order' element={<Orderpage />}></Route>
+				<Route exact path='/cart' element={<Cart />}></Route>
 			</Routes>
 			<Footer/>
 		</div>

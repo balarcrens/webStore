@@ -29,7 +29,7 @@ router.post('/addproduct', fetchuser, requireAdmin, [
         const product = new Product({ ...req.body });
         const savedProduct = await product.save();
         res.json(savedProduct);
-    } catch (err) {
+    } catch (err) { 
         console.error(err);
         res.status(500).send("Internal Server Error");
     }

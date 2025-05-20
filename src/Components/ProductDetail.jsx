@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Alert from './Alert';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../Redux/slices/cartslice';
 
 export default function ProductDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
+    const dispatch = useDispatch();
+
     useEffect(() => {
         const fetchProduct = async () => {
             if (!localStorage.getItem("auth-token")) {
@@ -140,6 +144,7 @@ export default function ProductDetail() {
                         Payable Amount : {product.price * quantity} <br />
                     </div>
                     <div className="d-flex gap-3">
+                        <button onClick={e => { dispatch(addItem({ product: product })) }} className="btn btn-primary mt-3">Add to Cart</button>
                         <button onClick={handlePayment} className="btn btn-primary mt-3">Buy Now</button>
                     </div>
                 </div>

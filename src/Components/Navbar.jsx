@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 export default function Navbar() {
@@ -6,6 +7,9 @@ export default function Navbar() {
         localStorage.removeItem("auth-token");
         window.location.href = '/login';
     }
+
+    const cartProduct = useSelector((state) => state.cart);
+    
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
@@ -28,7 +32,14 @@ export default function Navbar() {
                             <Link className="nav-link" to="/contact">Contact</Link>
                         </li>
                     </ul>
-                    <Link to="order" style={{ marginRight:"20px", color:"black" }}><i className="fa-solid fa-box-open fa-xl"></i></Link>
+                    <Link to="/order" style={{ marginRight: "20px", color: "black" }}><i className="fa-solid fa-box-open fa-xl"></i></Link>
+                    <Link to="/cart" style={{ marginRight: "20px", color: "black" }}>
+                        <i className="fa-solid fa-cart-shopping fa-xl"> </i>
+                        <span className="position-relative top-0 left-50 translate-middle badge rounded-pill bg-danger">
+                            { cartProduct.length }
+                            <span className="visually-hidden">unread messages</span>
+                        </span>
+                    </Link>
                     {
                         !localStorage.getItem("auth-token") ? <form className="d-flex">
                             <Link className="btn btn-primary mx-1" to="/signup" role="button">SignUp / Login</Link>
